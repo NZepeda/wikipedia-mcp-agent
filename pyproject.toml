@@ -1,0 +1,16 @@
+[project]
+name = "wikipedia-mcp-agent"
+version = "0.1.0"
+description = "A"
+readme = "README.md"
+requires-python = ">=3.12.6"
+dependencies = [
+    "langchain>=1.2.0",
+    "langchain-mcp-adapters>=0.2.1",
+    "langchain-openai>=1.1.6",
+    "langgraph>=1.0.5",
+    "mcp>=1.25.0",
+    "python-dotenv>=1.2.1",
+    "wikipedia>=1.4.0",
+    "wikipedia-sections>=2.0.0",
+]
