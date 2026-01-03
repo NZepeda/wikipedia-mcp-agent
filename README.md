@@ -1,4 +1,4 @@
-# MCP Tutorial - Wikipedia AI Assistant
+# MCP Server - Wikipedia AI Assistant
 
 Interactive AI assistant powered by MCP (Model Context Protocol) that searches Wikipedia using GPT-4.
 
