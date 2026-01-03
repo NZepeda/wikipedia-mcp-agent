@@ -588,33 +588,6 @@ wheels = [
 ]
 
 [[package]]
-name = "mcp-tutorial"
-version = "0.1.0"
-source = { virtual = "." }
-dependencies = [
-    { name = "langchain" },
-    { name = "langchain-mcp-adapters" },
-    { name = "langchain-openai" },
-    { name = "langgraph" },
-    { name = "mcp" },
-    { name = "python-dotenv" },
-    { name = "wikipedia" },
-    { name = "wikipedia-sections" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "langchain", specifier = ">=1.2.0" },
-    { name = "langchain-mcp-adapters", specifier = ">=0.2.1" },
-    { name = "langchain-openai", specifier = ">=1.1.6" },
-    { name = "langgraph", specifier = ">=1.0.5" },
-    { name = "mcp", specifier = ">=1.25.0" },
-    { name = "python-dotenv", specifier = ">=1.2.1" },
-    { name = "wikipedia", specifier = ">=1.4.0" },
-    { name = "wikipedia-sections", specifier = ">=2.0.0" },
-]
-
-[[package]]
 name = "openai"
 version = "2.14.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1322,6 +1295,33 @@ dependencies = [
     { name = "requests" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/67/35/25e68fbc99e672127cc6fbb14b8ec1ba3dfef035bf1e4c90f78f24a80b7d/wikipedia-1.4.0.tar.gz", hash = "sha256:db0fad1829fdd441b1852306e9856398204dc0786d2996dd2e0c8bb8e26133b2", size = 27748, upload-time = "2014-11-15T15:59:49.808Z" }
+
+[[package]]
+name = "wikipedia-mcp-agent"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "langchain" },
+    { name = "langchain-mcp-adapters" },
+    { name = "langchain-openai" },
+    { name = "langgraph" },
+    { name = "mcp" },
+    { name = "python-dotenv" },
+    { name = "wikipedia" },
+    { name = "wikipedia-sections" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "langchain", specifier = ">=1.2.0" },
+    { name = "langchain-mcp-adapters", specifier = ">=0.2.1" },
+    { name = "langchain-openai", specifier = ">=1.1.6" },
+    { name = "langgraph", specifier = ">=1.0.5" },
+    { name = "mcp", specifier = ">=1.25.0" },
+    { name = "python-dotenv", specifier = ">=1.2.1" },
+    { name = "wikipedia", specifier = ">=1.4.0" },
+    { name = "wikipedia-sections", specifier = ">=2.0.0" },
+]
 
 [[package]]
 name = "wikipedia-sections"
