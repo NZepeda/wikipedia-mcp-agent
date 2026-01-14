@@ -4,8 +4,7 @@ from mcp import stdio_client
 from mcp.client.session import ClientSession
 from langchain_core.messages import HumanMessage
 
-from .config import SERVER_PARAMS
-from .graph import create_graph
+from shared import SERVER_PARAMS, create_graph
 
 
 async def list_prompts(session):

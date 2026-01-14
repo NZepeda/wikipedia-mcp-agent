@@ -19,10 +19,8 @@ async def create_graph(session):
     Returns:
         Compiled graph with memory checkpointer
     """
-    # Load tools from MCP server
     tools = await load_mcp_tools(session)
 
-    # LLM configuration
     llm = ChatOpenAI(
         model=MODEL_NAME, temperature=TEMPERATURE, openai_api_key=OPENAI_API_KEY
     )

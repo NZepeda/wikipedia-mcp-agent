@@ -2,7 +2,6 @@ import os
 from dotenv import load_dotenv
 from mcp import StdioServerParameters
 
-# Load environment variables from .env file
 load_dotenv()
 
 # OpenAI Configuration

@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.claude/
+
+# Environment
+.env.local
+.env.*.local
+
+# Other
+*.log
+.DS_Store
+node_modules/
+frontend/
+README.md
+main.py
+uv.lock
