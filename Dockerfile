@@ -17,6 +17,16 @@ COPY shared/ /app/shared/
 COPY backend/ /app/backend/
 COPY suggested_titles.txt /app/
 
+# Create a non-root user for security
+# Concretely, this means the application will not run with root privileges, so any potential security vulnerabilities in the application will have limited access to the host system.
+RUN useradd --create-home --shell /bin/bash appuser
+
+# Change ownership of the app directory to the non-root user
+RUN chown -R appuser:appuser /app
+
+# Switch to non-root user
+USER appuser
+
 # Expose port (Railway will set the PORT env variable)
 EXPOSE 8000
 
