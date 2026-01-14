@@ -1,0 +1,1 @@
+- Always write a docstring for every function, class, and module you create.

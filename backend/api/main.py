@@ -13,8 +13,6 @@ from shared import SERVER_PARAMS, create_graph
 # Global variables to store MCP session and agent
 mcp_session: Optional[ClientSession] = None
 agent = None
-stdio_context = None
-session_context = None
 
 
 @asynccontextmanager
@@ -23,33 +21,21 @@ async def lifespan(app: FastAPI):
     Manage the lifecycle of the MCP client connection.
     Opens connection on startup and closes on shutdown.
     """
-    global mcp_session, agent, stdio_context, session_context
+    global mcp_session, agent
 
     print("Starting MCP server connection...")
 
-    try:
-        # Start the MCP server connection with proper context management
-        stdio_context = stdio_client(SERVER_PARAMS)
-        read_stream, write_stream = await stdio_context.__aenter__()
+    async with stdio_client(SERVER_PARAMS) as (read_stream, write_stream):
+        async with ClientSession(read_stream, write_stream) as session:
+            await session.initialize()
+            mcp_session = session
+            agent = await create_graph(session)
 
-        session_context = ClientSession(read_stream, write_stream)
-        mcp_session = await session_context.__aenter__()
-        await mcp_session.initialize()
+            print("MCP server connection established!")
 
-        # Create the agent
-        agent = await create_graph(mcp_session)
+            yield
 
-        print("MCP server connection established!")
-
-        yield
-
-    finally:
-        # Cleanup on shutdown
-        print("Shutting down MCP server connection...")
-        if session_context:
-            await session_context.__aexit__(None, None, None)
-        if stdio_context:
-            await stdio_context.__aexit__(None, None, None)
+            print("Shutting down MCP server connection...")
 
 
 # Create FastAPI app
@@ -72,28 +58,40 @@ app.add_middleware(
 
 # Request/Response models
 class ChatRequest(BaseModel):
+    """Request body for the /chat endpoint."""
+
     message: str
     thread_id: str = "wiki-session"
 
 
 class ChatResponse(BaseModel):
+    """Response body for the /chat and /prompt endpoints."""
+
     response: str
     error: Optional[str] = None
 
 
 class PromptRequest(BaseModel):
+    """Request body for the /prompt endpoint."""
+
     name: str
     arguments: dict = {}
     thread_id: str = "wiki-session"
 
 
 class ResourceRequest(BaseModel):
+    """Request body for the /resource endpoint."""
+
     name: str
 
 
 # Health check endpoint
 @app.get("/")
 async def root():
+    """
+    The root route.
+    Useful for ensuring that the server is up and running.
+    """
     return {
         "message": "Wikipedia MCP Agent API",
         "status": "running",
