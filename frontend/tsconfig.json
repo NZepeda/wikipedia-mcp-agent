@@ -1,0 +1,25 @@
+/* 
+  ROOT TYPESCRIPT CONFIGURATION
+  -----------------------------
+  This file acts as a "workspace solution" or "monorepo coordinator" for the TypeScript setup.
+  
+  Why multiple config files?
+  - Frontend code (src/) runs in the browser and needs DOM APIs (window, document).
+  - Build logic (vite.config.ts) runs in Node.js and needs Node APIs (process, path).
+  
+  Attempting to mix them in one config often leads to type errors (e.g. accidentally using 
+  'window' in a server script or 'process' in a React component).
+*/
+{
+  "files": [],
+  "references": [
+    // Configuration for the React Application (Browser)
+    {
+      "path": "./tsconfig.app.json"
+    },
+    // Configuration for Build Tools & Config Files (Node.js)
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
+}

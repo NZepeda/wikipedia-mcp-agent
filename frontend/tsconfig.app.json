@@ -1,0 +1,59 @@
+/**
+  * FRONTEND CONFIGURATION (Browser)
+  * --------------------------------
+  * This config specifically targets the source code of the React application.
+  * It ensures the code is compatible with browsers and uses React-specific settings.
+  */
+{
+  "compilerOptions": {
+    /**
+     * Basic Environment Setup 
+     * Targets ES2022 to support modern features like top-level await, 
+     * while remaining compatible with most recent browsers.
+     */
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    /**
+     * The "lib" array defines what global variables are available.
+     * "DOM" is included so TypeScript knows about 'window', 'document', etc.
+     */
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    /**
+     * Modules & Bundler
+     * "bundler" module resolution is a modern strategy for Vite/Webpack.
+     * It allows things like importing without extensions, which the bundler handles later.
+    */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true, // Ensures every file is safe to be transpiled individually
+    /**
+     * "noEmit": true means TypeScript ONLY checks for type errors.
+     * It does NOT produce .js outputs. Vite handles the actual build/transpilation.
+    */
+    "noEmit": true,
+    /**
+     * React Setup
+     * Enables the new JSX transform (no need to import React)
+    */
+    "jsx": "react-jsx",
+    /**
+     * Linting & Safety Checks
+     * Enable all strict type checking options
+    */
+    "strict": true,
+    "noUnusedLocals": true, // Error on unused variables
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  /**
+   * Strictly include only the source code, ignoring config files
+   */
+  "include": [
+    "src"
+  ]
+}
