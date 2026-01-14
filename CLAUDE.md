@@ -1,1 +1,2 @@
 - Always write a docstring for every function, class, and module you create.
+- Always use pnpm for package management in JavaScript/TypeScript projects.

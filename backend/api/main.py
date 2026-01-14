@@ -7,6 +7,7 @@ from pydantic import BaseModel
 from mcp import stdio_client
 from mcp.client.session import ClientSession
 from langchain_core.messages import HumanMessage
+from ag_ui_langgraph import LangGraphAgent, add_langgraph_fastapi_endpoint
 
 from shared import SERVER_PARAMS, create_graph
 
@@ -31,7 +32,18 @@ async def lifespan(app: FastAPI):
             mcp_session = session
             agent = await create_graph(session)
 
+            # Register AG-UI streaming endpoint
+            # This creates POST /agent that streams SSE events for real-time UI updates
+            # LangGraphAgent wraps the compiled graph to provide the AG-UI protocol interface
+            agui_agent = LangGraphAgent(
+                name="wikipediaAgent",
+                graph=agent,
+                description="Wikipedia search assistant powered by MCP tools",
+            )
+            add_langgraph_fastapi_endpoint(app, agui_agent, "/agent")
+
             print("MCP server connection established!")
+            print("AG-UI endpoint registered at /agent")
 
             yield
 
